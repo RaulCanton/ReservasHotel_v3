@@ -60,6 +60,9 @@ public class Reserva {
         return habitacion;
     }
     public void setHabitacion(Habitacion habitacion){
+        if ((habitacion==null)){
+            throw new NullPointerException("La habitación no puede ser nula.");
+        }
         this.habitacion=habitacion;
 
     }
@@ -148,18 +151,10 @@ public class Reserva {
     }
 
     private void setPrecio() {
-        if(habitacion.getTipoHabitacion()== TipoHabitacion.SIMPLE){
-            precio = precio+(TipoHabitacion.SIMPLE.numeroMaximoPersonas *50);
-        }
-        if (habitacion.getTipoHabitacion()==TipoHabitacion.DOBLE){
-            precio=precio+(TipoHabitacion.DOBLE.numeroMaximoPersonas* 50);
-        }
-        if (habitacion.getTipoHabitacion()==TipoHabitacion.TRIPLE){
-            precio=precio+(TipoHabitacion.TRIPLE.numeroMaximoPersonas* 50);
-        }
-        if (habitacion.getTipoHabitacion()==TipoHabitacion.SUITE){
-            precio=precio+(TipoHabitacion.SUITE.numeroMaximoPersonas* 50);
-        }
+        int maxPersonas = habitacion.getNumeroMaximoPersonas();
+
+        precio=precio+(maxPersonas*50);
+
         if (regimen==Regimen.SOLO_ALOJAMIENTO){
             this.precio=precio+(Regimen.SOLO_ALOJAMIENTO.getIncrementoPrecio()*numeroPersonas);
         }
@@ -197,7 +192,7 @@ public class Reserva {
 
     public String toString(){
         return String.format("Huesped: %s %s Habitación:%s - %s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d",getHuesped().getNombre(), getHuesped().getDni(),
-                getHabitacion().getIdentificador(),getHabitacion().getTipoHabitacion(), getFechaInicioReserva().format(DateTimeFormatter.ofPattern(FORMATO_FECHA_RESERVA)),
+                getHabitacion().getIdentificador(), getFechaInicioReserva().format(DateTimeFormatter.ofPattern(FORMATO_FECHA_RESERVA)),
                 getFechaFinReserva(), getPrecio());
 
     }
