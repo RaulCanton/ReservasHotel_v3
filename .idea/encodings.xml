@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="ISO-8859-1" addBOMForNewFiles="with BOM">
     <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/Controlador/Controlador.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/MainApp.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/MainApp.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/Modelo/Modelo.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/Modelo/dominio/Habitacion.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/reservashotel/Modelo/dominio/Huesped.java" charset="windows-1252" />
