@@ -4,24 +4,24 @@ public class Doble extends Habitacion{
 
     private static final int NUM_MAXIMO_PERSONAS=2;
 
-    static final int MIN_NUM_CAMAS_INDIVIDUALES=1;
-    static final int MAX_NUM_CAMAS_INDIVIDUALES=2;
-    static final int MIN_NUM_CAMAS_DOBLES=1;
-    static final int MAX_NUM_CAMAS_DOBLES=1;
+    final int MIN_NUM_CAMAS_INDIVIDUALES=1;
+    final int MAX_NUM_CAMAS_INDIVIDUALES=2;
+    final int MIN_NUM_CAMAS_DOBLES=1;
+    final int MAX_NUM_CAMAS_DOBLES=1;
 
     private int numCamasIndividuales;
     private int numCamasDobles;
 
     public Doble(int planta, int puerta, double precio, int numCamasIndividuales,int numCamasDobles) {
         super(planta, puerta, precio);
-        this.numCamasIndividuales = numCamasIndividuales;
-        this.numCamasDobles=numCamasDobles;
+        setNumCamasIndividuales(numCamasIndividuales);
+        setNumCamasDobles(numCamasDobles);
     }
 
     public Doble(Doble habitacionDoble) {
         super(habitacionDoble.getPlanta(), habitacionDoble.getPuerta(), habitacionDoble.getPrecio());
-        getNumCamasIndividuales();
-        getNumCamasDobles();
+        setNumCamasIndividuales(habitacionDoble.getNumCamasIndividuales());
+        setNumCamasDobles(habitacionDoble.getNumCamasDobles());
 
     }
 
@@ -45,12 +45,10 @@ public class Doble extends Habitacion{
         if(numCamasIndividuales !=2 && (numCamasDobles<1 || numCamasDobles>2)){
             throw new IllegalArgumentException("El número de camas elegido no es correcto.");
         }
-
-
     }
 
     @Override
-    protected int getNumeroMaximoPersonas() {
+    public int getNumeroMaximoPersonas() {
         return NUM_MAXIMO_PERSONAS;
     }
 

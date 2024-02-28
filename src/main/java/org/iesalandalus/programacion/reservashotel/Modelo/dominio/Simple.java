@@ -13,7 +13,7 @@ public class Simple extends Habitacion{
     }
 
     @Override
-    protected int getNumeroMaximoPersonas() {
+    public int getNumeroMaximoPersonas() {
         return NUM_MAXIMO_PERSONAS;
     }
 

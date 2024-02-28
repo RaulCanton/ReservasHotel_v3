@@ -1,48 +1,51 @@
-package org.iesalandalus.programacion.reservashotel.Modelo.negocio;
+package org.iesalandalus.programacion.reservashotel.Modelo.negocio.memoria;
 
-import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.Modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.Modelo.dominio.*;
+import org.iesalandalus.programacion.reservashotel.Modelo.negocio.IHabitaciones;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-public class Habitaciones {
+public class Habitaciones implements IHabitaciones {
     private List<Habitacion> coleccionHabitacion;
 
     public Habitaciones(){
         coleccionHabitacion=new ArrayList<>();
     }
-
+    @Override
     public List<Habitacion> get(){
-        return copiaProfundaHabitacion(coleccionHabitacion);
+        return coleccionHabitacion;
     }
-
-    public List<Habitacion> get(TipoHabitacion tipoHabitacion){
+    @Override
+    public List<Habitacion> get(TipoHabitacion tipoHabitacion) {
         if (tipoHabitacion == null) {
             throw new NullPointerException("ERROR: El tipo de habitación no puede ser nulo.");
         }
 
-        List<Habitacion>habitacionTipoHabitacion = new ArrayList<>();
+        List<Habitacion> habitacionTipoHabitacion = new ArrayList<>();
         for (Habitacion habitacion : coleccionHabitacion) {
-            if (habitacion != null && habitacion.getTipoHabitacion().equals(tipoHabitacion)) {
-                habitacionTipoHabitacion.add(new Habitacion(habitacion));//constructor copia
+
+            if (tipoHabitacion == TipoHabitacion.SIMPLE && habitacion instanceof Simple) {
+                habitacionTipoHabitacion.add(new Simple((Simple) habitacion));
+            } else if (tipoHabitacion == TipoHabitacion.DOBLE && habitacion instanceof Doble) {
+                habitacionTipoHabitacion.add(new Doble((Doble) habitacion));
+
+            } else if (tipoHabitacion == TipoHabitacion.TRIPLE && habitacion instanceof Triple) {
+                habitacionTipoHabitacion.add(new Triple((Triple) habitacion));
+                ;
+            } else if (tipoHabitacion == TipoHabitacion.SUITE && habitacion instanceof Suite) {
+                habitacionTipoHabitacion.add(new Suite((Suite) habitacion));
             }
         }
-        return habitacionTipoHabitacion;
+            return habitacionTipoHabitacion;
     }
-
-    private List<Habitacion> copiaProfundaHabitacion(List<Habitacion> habitacions) {
-        List<Habitacion> otrasHabitacion = new ArrayList<>();
-        for (Habitacion habitacion : habitacions){
-            otrasHabitacion.add(new Habitacion(habitacion));
-        }
-        return otrasHabitacion;
-    }
+    @Override
     public int getTamano() {
 
         return coleccionHabitacion.size();
     }
-
+    @Override
     public void insertar (Habitacion habitacion) throws OperationNotSupportedException {
         if (habitacion == null) {
             throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
@@ -50,7 +53,7 @@ public class Habitaciones {
 
         if (!coleccionHabitacion.contains(habitacion))
         {
-            coleccionHabitacion.add(new Habitacion(habitacion));
+            coleccionHabitacion.add(habitacion);
         }
         else
         {
@@ -58,8 +61,8 @@ public class Habitaciones {
         }
     }
 
-
-    public Habitacion buscar (Habitacion habitacion){
+    @Override
+    public Habitacion buscar (Habitacion habitacion)throws NullPointerException{
         if (habitacion == null) {
             throw new NullPointerException("ERROR: No se puede buscar una habitación nula.");
         }
@@ -69,16 +72,15 @@ public class Habitaciones {
         if (indice == -1){
             return null;
         }else{
-            return new Habitacion(coleccionHabitacion.get(indice));
+            return coleccionHabitacion.get(indice);
         }
 
     }
-
+    @Override
     public void borrar (Habitacion habitacion) throws OperationNotSupportedException {
         if (habitacion == null) {
             throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");
         }
-
 
         int indice=coleccionHabitacion.lastIndexOf(habitacion);
 

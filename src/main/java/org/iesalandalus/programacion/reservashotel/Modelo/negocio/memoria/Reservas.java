@@ -1,17 +1,19 @@
-package org.iesalandalus.programacion.reservashotel.Modelo.negocio;
+package org.iesalandalus.programacion.reservashotel.Modelo.negocio.memoria;
 
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.Modelo.negocio.IReservas;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reservas {
+public class Reservas implements IReservas {
 
     private List<Reserva> coleccionReserva;
 
@@ -22,15 +24,9 @@ public class Reservas {
     }
 
     public List <Reserva> get(){
-        return copiaProfundaReserva(coleccionReserva);
+        return coleccionReserva;
     }
-    private List <Reserva> copiaProfundaReserva(List <Reserva> reserv){
-        List <Reserva> otrasReserva = new ArrayList<>();
-        for (Reserva reserva : reserv){
-            otrasReserva.add(new Reserva(reserva));
-        }
-        return otrasReserva;
-    }
+
     public int getTamano() {
         return coleccionReserva.size();
     }
@@ -46,6 +42,7 @@ public class Reservas {
         }
     }
 
+    @Override
     public Reserva buscar (Reserva reserva){
         Reserva reservaEncontrada=null;
         if (reserva == null) {
@@ -115,24 +112,24 @@ public class Reservas {
         return reservasHabitacion;
     }
 
-    public void realizarCheckin (Reserva reserva, LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckin (Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
         if (reserva == null) {
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
 
         System.out.print("Introduce la fecha de checkIn.");
         String fechaCheckIn= Entrada.cadena();
-        fecha=LocalDate.parse(fechaCheckIn);
+        fecha= LocalDate.from(LocalDateTime.parse(fechaCheckIn)).atStartOfDay();
         reserva.setCheckIn(fecha);
     }
-    public void realizarCheckout (Reserva reserva, LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckout (Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
         if (reserva == null) {
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
 
         System.out.print("Introduce la fecha de checkOut.");
         String fechaCheckOut= Entrada.cadena();
-        fecha=LocalDate.parse(fechaCheckOut);
+        fecha= LocalDate.from(LocalDateTime.parse(fechaCheckOut)).atStartOfDay();
         reserva.setCheckOut(fecha);
     }
 }

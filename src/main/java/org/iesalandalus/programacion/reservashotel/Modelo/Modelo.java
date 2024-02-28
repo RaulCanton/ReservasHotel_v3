@@ -4,9 +4,9 @@ import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.TipoHabitacion;
-import org.iesalandalus.programacion.reservashotel.Modelo.negocio.Habitaciones;
-import org.iesalandalus.programacion.reservashotel.Modelo.negocio.Huespedes;
-import org.iesalandalus.programacion.reservashotel.Modelo.negocio.Reservas;
+import org.iesalandalus.programacion.reservashotel.Modelo.negocio.memoria.Habitaciones;
+import org.iesalandalus.programacion.reservashotel.Modelo.negocio.memoria.Huespedes;
+import org.iesalandalus.programacion.reservashotel.Modelo.negocio.memoria.Reservas;
 import org.iesalandalus.programacion.reservashotel.vista.Consola;
 
 import javax.naming.OperationNotSupportedException;
@@ -98,10 +98,13 @@ public class Modelo {
         System.out.println("Se ha borrado la habitación.");
 
     }
-
+    /*public Habitacion getTipoHabitacion(TipoHabitacion tipoHabitacion){
+        return habitaciones.get();
+    }*/
     public List<Habitacion> getHabitaciones(){
         return habitaciones.get();
     }
+
     public void insertarReserva()throws OperationNotSupportedException{
 
             Reserva reserva1 = Consola.leerReserva();

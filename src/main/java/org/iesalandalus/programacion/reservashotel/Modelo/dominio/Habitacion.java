@@ -36,11 +36,15 @@ public abstract class Habitacion {
         setIdentificador(habitacion.getIdentificador());
     }
 
-    protected abstract int getNumeroMaximoPersonas();
+    public abstract int getNumeroMaximoPersonas();
 
 
     public String getIdentificador(){
        return identificador;
+    }
+
+    protected void setIdentificador(){
+        this.identificador=identificador;
     }
     protected void setIdentificador(String identificador){
         if (identificador==null){

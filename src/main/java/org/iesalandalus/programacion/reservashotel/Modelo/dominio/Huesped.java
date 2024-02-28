@@ -16,8 +16,8 @@ public class Huesped {
     private String nombre;
     private String telefono;
     private String correo;
-    private String dni;
     private LocalDate fechaNacimiento;
+    private String dni;
 
 
 
@@ -113,7 +113,7 @@ public class Huesped {
         return dni;
     }
 
-    public void setDni(String dni){
+    private void setDni(String dni){
         if (dni==null){
             throw  new NullPointerException("ERROR: El dni de un huésped no puede ser nulo.");
         }
@@ -149,7 +149,7 @@ public class Huesped {
     }
 
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento){
+    private void setFechaNacimiento(LocalDate fechaNacimiento){
         if (fechaNacimiento==null){
             throw  new NullPointerException("ERROR: La fecha de nacimiento de un huésped no puede ser nula.");
         }
@@ -161,7 +161,7 @@ public class Huesped {
 
         return fechaNacimiento;
     }
-    public String getIniciales(){
+    private String getIniciales(){
        StringBuilder iniciales=new StringBuilder();
        StringTokenizer palabras = new StringTokenizer(nombre);
 

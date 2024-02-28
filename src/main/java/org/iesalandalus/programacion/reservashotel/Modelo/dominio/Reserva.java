@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -19,8 +20,8 @@ public class Reserva {
     private Regimen regimen;
     private LocalDate fechaInicioReserva;
     private LocalDate fechaFinReserva;
-    private LocalDate checkIn;
-    private LocalDate checkOut;
+    private LocalDateTime checkIn;
+    private LocalDateTime checkOut;
     private double precio;
     private int numeroPersonas;
 
@@ -114,25 +115,25 @@ public class Reserva {
         }
     }
 
-    public LocalDate getCheckIn() {
+    public LocalDateTime getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(LocalDate checkIn) {
+    public void setCheckIn(LocalDateTime checkIn) {
         if (checkIn==null){
             throw new NullPointerException("ERROR: El checkin de una reserva no puede ser nulo.");
         }
-        if(checkIn.isBefore(fechaInicioReserva)){
+        if(checkIn.isBefore(fechaInicioReserva.atStartOfDay())){
             throw new IllegalArgumentException("ERROR: El checkin de una reserva no puede ser anterior a la fecha de inicio de la reserva. ");
         }
         this.checkIn = checkIn;
     }
 
-    public LocalDate getCheckOut() {
+    public LocalDateTime getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
+    public void setCheckOut(LocalDateTime checkOut) {
         if (checkOut==null){
             throw new NullPointerException("ERROR: El checkOut de una reserva no puede ser nulo.");
         }
@@ -140,7 +141,7 @@ public class Reserva {
             throw new IllegalArgumentException("ERROR: El checkOut de una reserva no puede ser anterior al checkin. ");
         }
         LocalDateTime diaHoraOut =LocalDateTime.now().plusHours(MAX_HORAS_POSTERIOR_CHECKOUT);
-        if (checkOut.isAfter(ChronoLocalDate.from(diaHoraOut))){
+        if (checkOut.isAfter(ChronoLocalDateTime.from(diaHoraOut))){
             throw new IllegalArgumentException(("ERROR: El checkout de una reserva puede ser como máximo 12 horas después de la fecha de fin de la reserva."));
         }
         this.checkOut = checkOut;
