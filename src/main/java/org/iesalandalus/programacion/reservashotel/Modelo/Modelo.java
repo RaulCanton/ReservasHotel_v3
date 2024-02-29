@@ -11,6 +11,7 @@ import org.iesalandalus.programacion.reservashotel.vista.Consola;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Modelo {
@@ -33,129 +34,91 @@ public class Modelo {
         System.out.println("El programa ha terminado.");
     }
 
-    public void insertarHuesped()throws OperationNotSupportedException{
+    public void insertar(Huesped huesped)throws OperationNotSupportedException{
 
-            Huesped huesped1 = Consola.leerHuesped();
-            huespedes.insertar(huesped1);
-
+            huespedes.insertar(huesped);
     }
 
-    public Huesped buscarHuesped() {
+    public Huesped buscar(Huesped huesped) {
 
-        Huesped huesped1;
-        do {
-            huesped1 = new Huesped(Consola.leerClientePorDni());
-        } while (huesped1 == null);
-
-        Huesped huesped2 = huespedes.buscar(huesped1);
-
-        return huesped2;
-
+        return huespedes.buscar(huesped);
     }
 
-    public void borrarHuesped() throws OperationNotSupportedException{
+    public void borrar(Huesped huesped) throws OperationNotSupportedException{
 
-        Huesped huesped1;
-        do {
-            huesped1 = new Huesped(Consola.leerClientePorDni());
-        } while (huesped1 == null);
-        Huesped huesped2= huespedes.buscar(huesped1);
-
-        huespedes.borrar(huesped2);
-        System.out.println("Se ha borrado el huésped.");
-
+        huespedes.borrar(huesped);
     }
 
     public List<Huesped> getHuespedes(){
+
         return huespedes.get();
     }
 
-    public  void insertarHabitacion()throws OperationNotSupportedException{
-            Habitacion habitacion1 = Consola.leerHabitacion();
-            habitaciones.insertar(habitacion1);
+    public  void insertar(Habitacion habitacion)throws OperationNotSupportedException{
 
+            habitaciones.insertar(habitacion);
     }
-    public Habitacion buscarHabitacion() {
-        Habitacion habitacion1;
-        do {
-            habitacion1 = new Habitacion(Consola.leerHabitacionPorIdentificador());
-        } while (habitacion1 == null);
+    public Habitacion buscar(Habitacion habitacion) {
 
-        Habitacion habitacion2 = habitaciones.buscar(habitacion1);
-        return habitacion2;
-
+        return habitaciones.buscar(habitacion);
     }
 
-    public void borrarHabitacion() throws OperationNotSupportedException{
+    public void borrar(Habitacion habitacion) throws OperationNotSupportedException{
 
-        Habitacion habitacion1;
-        do {
-            habitacion1 = new Habitacion(Consola.leerHabitacionPorIdentificador());
-        } while (habitacion1 == null);
-        Habitacion habitacion2= habitaciones.buscar(habitacion1);
-
-        habitaciones.borrar(habitacion2);
+        habitaciones.borrar(habitacion);
         System.out.println("Se ha borrado la habitación.");
-
     }
-    /*public Habitacion getTipoHabitacion(TipoHabitacion tipoHabitacion){
-        return habitaciones.get();
-    }*/
+
+    public List <Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion){
+
+        return habitaciones.get(tipoHabitacion);
+    }
     public List<Habitacion> getHabitaciones(){
+
         return habitaciones.get();
     }
 
-    public void insertarReserva()throws OperationNotSupportedException{
+    public void insertar(Reserva reserva)throws OperationNotSupportedException{
 
-            Reserva reserva1 = Consola.leerReserva();
-            reservas.insertar(reserva1);
-
+            reservas.insertar(reserva);
     }
-    public void borrarReserva() throws OperationNotSupportedException{
+    public void borrar(Reserva reserva) throws OperationNotSupportedException{
 
-        Reserva reserva1;
-        do {
-            reserva1 = new Reserva(Consola.leerReserva());
-        } while (reserva1 == null);
-        Reserva reserva2= reservas.buscar(reserva1);
-
-        reservas.borrar(reserva2);
-        System.out.println("Se ha borrado la reserva.");
-
+        reservas.borrar(reserva);
     }
-    public Reserva buscarReserva(Reserva reserva) {
-        Reserva reserva1;
-        do {
-            reserva1 = new Reserva(Consola.leerReserva());
-        } while (reserva1 == null);
 
-        Reserva reserva2 = reservas.buscar(reserva1);
-        return reserva2;
+    public Reserva buscar(Reserva reserva) {
 
+      return reservas.buscar(reserva);
     }
 
     public List<Reserva> getReservas(){
+
         return reservas.get();
     }
     public List<Reserva> getReservas (Huesped huesped){
+
         return reservas.getReservas(huesped);
     }
 
     public List<Reserva> getReservas(TipoHabitacion tipoHabitacion){
+
         return reservas.getReservas(tipoHabitacion);
     }
 
     public List<Reserva> getReservasFuturas(Habitacion habitacion){
+
         return reservas.getReservasFuturas(habitacion);
     }
 
-    public void realizarCheckin(Reserva reserva, LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckin(Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
+
         reservas.realizarCheckin(reserva,fecha);
     }
 
-    public void realizarCheckout(Reserva reserva, LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckout(Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
+
         reservas.realizarCheckout(reserva,fecha);
     }
-
 
 }

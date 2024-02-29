@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Controlador {
@@ -21,11 +22,11 @@ public class Controlador {
     public Controlador(Modelo modelo, Vista vista){
 
         if (modelo==null){
-            throw new IllegalArgumentException("ErRRor el modelo no puede ser nulo.");
+            throw new IllegalArgumentException("ERROR: el modelo no puede ser nulo.");
         }
 
         if (vista==null){
-            throw new IllegalArgumentException("La vista no puede ser nula");
+            throw new IllegalArgumentException("ERROR: La vista no puede ser nula");
         }
 
         this.modelo=modelo;
@@ -43,30 +44,30 @@ public class Controlador {
     }
 
     public void insertar(Huesped huesped)throws OperationNotSupportedException{
-        modelo.insertarHuesped();
+        modelo.insertar(huesped);
     }
     public Huesped buscar(Huesped huesped){
-       return huesped=modelo.buscarHuesped();
+       return modelo.buscar(huesped);
     }
 
     public void borrar(Huesped huesped) throws OperationNotSupportedException {
-        modelo.borrarHuesped();
+        modelo.borrar(huesped);
     }
 
-    public List<Huesped> getHuesped(){
+    public List<Huesped> getHuespedes(){
         return modelo.getHuespedes();
     }
 
     public void insertar(Habitacion habitacion)throws OperationNotSupportedException{
-        modelo.insertarHabitacion();
+        modelo.insertar(habitacion);
 
     }
     public Habitacion buscar(Habitacion habitacion){
-        return habitacion=modelo.buscarHabitacion();
+        return modelo.buscar(habitacion);
     }
 
     public void borrar(Habitacion habitacion) throws OperationNotSupportedException {
-        modelo.borrarHabitacion();
+        modelo.borrar(habitacion);
     }
 
     public List<Habitacion> getHabitaciones (){
@@ -78,14 +79,14 @@ public class Controlador {
     }
 
     public void insertar (Reserva reserva) throws OperationNotSupportedException{
-        modelo.insertarReserva();
+        modelo.insertar(reserva);
     }
 
     public void borrar (Reserva reserva)throws OperationNotSupportedException{
-        modelo.borrarReserva();
+        modelo.borrar(reserva);
     }
     public Reserva buscar(Reserva reserva){
-        return modelo.buscarReserva(reserva);
+        return modelo.buscar(reserva);
 
     }
 
@@ -104,10 +105,10 @@ public class Controlador {
         return modelo.getReservasFuturas(habitacion);
     }
 
-    public void realizarCheckIn(Reserva reserva, LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckIn(Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
         modelo.realizarCheckin(reserva,fecha);
     }
-    public void realizarCheckOut(Reserva reserva,LocalDate fecha)throws OperationNotSupportedException{
+    public void realizarCheckOut(Reserva reserva,LocalDateTime fecha)throws OperationNotSupportedException{
         modelo.realizarCheckout(reserva,fecha);
     }
 
