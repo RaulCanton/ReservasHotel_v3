@@ -26,6 +26,7 @@ public class Vista {
             throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
         }
         this.controlador = controlador;
+        Opcion.setVista(this);
     }
     public void comenzar(){
 
@@ -43,61 +44,7 @@ public class Vista {
 
     private void ejecutarOpcion(Opcion opcion){
 
-        switch (opcion) {
-            case SALIR:
-                terminar();
-                break;
-            case INSERTAR_HUESPED:
-                insertarHuesped();
-                break;
-            case BUSCAR_HUESPED:
-                buscarHuesped();
-                break;
-            case BORRAR_HUESPED:
-                borrarHuesped();
-                break;
-            case MOSTRAR_HUESPEDES:
-                mostrarHuespedes();
-                break;
-            case INSERTAR_HABITACION:
-                insertarHabitacion();
-                break;
-            case BUSCAR_HABITACION:
-                buscarHabitacion();
-                break;
-            case BORRAR_HABITACION:
-                borrarHabitacion();
-                break;
-            case MOSTRAR_HABITACIONES:
-                mostrarHabitaciones();
-                break;
-            case INSERTAR_RESERVA:
-                insertarReserva();
-                break;
-            case ANULAR_RESERVA:
-                anularReserva();
-                break;
-            case MOSTRAR_RESERVAS:
-                mostrarReservas();
-                break;
-            case LISTAR_RESERVAS_HUESPED:
-                mostrarReservaHuesped();
-                break;
-            case LISTAR_RESERVAS_TIPO_HABITACION:
-                mostrarReservasTipoHabitacion();
-                break;
-            case CONSULTAR_DISPONIBILIDAD:
-               comprobarDisponibilidad();
-                break;
-            case REALIZAR_CHECKIN:
-                realizarCheckIn();
-                break;
-            case REALIZAR_CHECKOUT:
-                realizarCheckOut();
-                break;
-
-        }
-
+        opcion.ejecutar();
     }
 
     public void insertarHuesped(){
