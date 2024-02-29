@@ -17,7 +17,10 @@ import java.util.List;
 public class Vista {
 
     private Controlador controlador;
-    public Vista(){}
+    public Vista(){
+
+
+    }
     public void setControlador(Controlador controlador) {
         if (controlador == null) {
             throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
@@ -76,6 +79,12 @@ public class Vista {
                 break;
             case MOSTRAR_RESERVAS:
                 mostrarReservas();
+                break;
+            case LISTAR_RESERVAS_HUESPED:
+                mostrarReservaHuesped();
+                break;
+            case LISTAR_RESERVAS_TIPO_HABITACION:
+                mostrarReservasTipoHabitacion();
                 break;
             case CONSULTAR_DISPONIBILIDAD:
                comprobarDisponibilidad();
@@ -236,7 +245,7 @@ public class Vista {
         }
     }
 
-    public void mostrarReservsTipoHabitacion(){
+    public void mostrarReservasTipoHabitacion(){
 
        // listarReservas(Consola.leerHabitacionPorIdentificador());
     }
