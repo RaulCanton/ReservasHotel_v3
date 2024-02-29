@@ -8,14 +8,14 @@ public class Triple extends Habitacion {
 
     final int MIN_NUM_CAMAS_INDIVIDUALES=2;
     final int MAX_NUM_CAMAS_INDIVIDUALES=3;
-    final int MIN_NUM_CAMAS_DOBLES=1;
+    final int MIN_NUM_CAMAS_DOBLES=0;
     final int MAX_NUM_CAMAS_DOBLES=1;
 
     private int numBanos;
     private int numCamasIndividuales;
     private int numCamasDobles;
 
-    public Triple(int planta, int puerta, double precio, int numBanos, int numCamasIndividuales, int numCamasDobles) {
+    public Triple(int planta, int puerta, double precio,String identificador, int numBanos, int numCamasIndividuales, int numCamasDobles) {
         super(planta, puerta, precio);
         setNumBanos(numBanos);
         setNumCamasIndividuales(numCamasIndividuales);

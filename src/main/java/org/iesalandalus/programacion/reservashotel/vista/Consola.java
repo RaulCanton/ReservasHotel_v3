@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.vista;
 
+import org.iesalandalus.programacion.reservashotel.Modelo.Modelo;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
@@ -50,7 +51,7 @@ public class Consola {
         return new Huesped (nombre,dni,telefono,correo,LocalDate.parse(fechaNacimiento));
 
     }
-    public static Huesped leerClientePorDni(){
+    public static Huesped getHuespedPorDni(){
         String dni;
 
         LocalDate formatoDia = LocalDate.parse("23/07/1980");
@@ -60,8 +61,7 @@ public class Consola {
             dni = Entrada.cadena();
         } while (dni.equals(""));
 
-        return new Huesped("Pepito Perez Perez",dni,"900101010","loquesea@gmail.com",formatoDia);
-
+       return new Huesped("Pepito Perez Perez",dni,"900101010","loquesea@gmail.com",formatoDia);
 
     }
 
@@ -83,10 +83,10 @@ public class Consola {
     }
     public static Habitacion leerHabitacion(){
 
+        int opcion;
         int planta;
         int puerta;
         double precio;
-        TipoHabitacion tipoHabitacion;
 
         do {
             System.out.print("Introduce el número de planta. ");
@@ -101,7 +101,30 @@ public class Consola {
             precio = Entrada.entero();
         }while (precio <40 || precio>150);
         String identificador=(String.format("%d%d",planta,puerta));
-        return new Habitacion (planta,puerta,precio,leerTipoHabitacion(),identificador);
+
+        do{
+            System.out.println("Elige una opción para el tipo de habitación:");
+            System.out.println("1.- Simple");
+            System.out.println("2.- Doble");
+            System.out.println("3.- triple");
+            System.out.println("4.- Suite");
+
+            opcion=Entrada.entero();
+
+        }while (opcion<=0 || opcion>4);
+
+        switch (opcion){
+            case 1:
+                return new Simple(planta,puerta,precio,identificador);
+            case 2:
+                return new Doble(planta,puerta,precio,identificador,1,2);
+            case 3:
+                return new Triple(planta,puerta,precio,identificador,2,3,0);
+            case 4:
+                return new Suite(planta,puerta,precio,identificador,1,true);
+            default:
+                throw new IllegalArgumentException("El tipo de habitación no es correcto.");
+        }
 
     }
     public static Habitacion leerHabitacionPorIdentificador(){
@@ -118,7 +141,7 @@ public class Consola {
             puerta = Entrada.entero();
         }while (puerta <0 || puerta>14);
         String identificador=(String.format("%d%d",planta,puerta));
-        return new Habitacion(planta,puerta,40,TipoHabitacion.SIMPLE,identificador);
+        return new Simple(planta,puerta,40,identificador);
 
     }
 
@@ -147,7 +170,7 @@ public class Consola {
         String fechaIn;
         String fechaFin;
         Huesped huesped = new Huesped(Consola.leerHuesped());
-        Habitacion habitacion = new Habitacion(Consola.leerHabitacion());
+        Habitacion habitacion = Consola.leerHabitacion();
         Regimen regimen;
         regimen=Consola.leerRegimen();
 

@@ -91,7 +91,7 @@ public class Vista {
 
     }
 
-    private void insertarHuesped(){
+    public void insertarHuesped(){
         try {
             Huesped huesped = Consola.leerHuesped();
             controlador.insertar(huesped);
@@ -104,7 +104,7 @@ public class Vista {
     }
 
 
-    private Huesped buscarHuesped() {
+    public Huesped buscarHuesped() {
 
         Huesped huesped1;
         do {
@@ -117,7 +117,7 @@ public class Vista {
 
     }
 
-    private void borrarHuesped(){
+    public void borrarHuesped(){
 
         Huesped huesped=new Huesped(Consola.leerClientePorDni());
     try {
@@ -131,7 +131,7 @@ public class Vista {
     }
 
     }
-    private void mostrarHuespedes() {
+    public void mostrarHuespedes() {
             List<Huesped> muestraHuespedes = controlador.getHuesped();
 
             if (muestraHuespedes.size() > 0) {
@@ -147,7 +147,7 @@ public class Vista {
                     throw new IllegalArgumentException("No hay huéspedes que mostrar.");
                 }
     }
-    private void insertarHabitacion(){
+    public void insertarHabitacion(){
         try {
             Habitacion habitacion1 = Consola.leerHabitacion();
             controlador.insertar(habitacion1);
@@ -162,7 +162,7 @@ public class Vista {
 
     }
 
-    private Habitacion buscarHabitacion() {
+    public Habitacion buscarHabitacion() {
         Habitacion habitacion1;
         do {
             habitacion1 = new Habitacion(Consola.leerHabitacionPorIdentificador());
@@ -173,7 +173,7 @@ public class Vista {
 
     }
 
-    private void borrarHabitacion(){
+    public void borrarHabitacion(){
         try {
 
             Habitacion habitacion1;
@@ -193,7 +193,7 @@ public class Vista {
         }
     }
 
-    private void mostrarHabitaciones() {
+    public void mostrarHabitaciones() {
         List<Habitacion> muestraHabitaciones = controlador.getHabitaciones();
         if (muestraHabitaciones.size() > 0) {
             Comparator<Habitacion> comparadorPlantaYPuerta =
@@ -211,7 +211,7 @@ public class Vista {
         }
     }
 
-    private void insertarReserva(){
+    public void insertarReserva(){
 
         try {
             Reserva reserva1 = Consola.leerReserva();
@@ -226,7 +226,7 @@ public class Vista {
         }
     }
 
-    private void listarReservas(Huesped huesped) {
+    public void listarReservas(Huesped huesped) {
 
         huesped = buscarHuesped();
         List<Reserva> reservaHuesped = controlador.getReservas(huesped);
@@ -248,7 +248,7 @@ public class Vista {
             System.out.println("Este huésped no tiene nínguna reserva.");
         }
     }
-    private void listarReservas(TipoHabitacion tipoHabitacion){
+    public void listarReservas(TipoHabitacion tipoHabitacion){
         tipoHabitacion=Consola.leerTipoHabitacion();
         List<Reserva> reservaTipoHabitacion=controlador.getReservas();
         if (reservaTipoHabitacion.size()>0) {
@@ -270,7 +270,7 @@ public class Vista {
     }
 
 
-    private void mostrarReservas() {
+    public void mostrarReservas() {
         List<Reserva> muestraReserva = controlador.getReservas();
         if (muestraReserva.size() > 0) {
             Comparator<Reserva> comparadorReserva=
@@ -289,7 +289,7 @@ public class Vista {
             throw new IllegalArgumentException ("No hay reservas que mostrar.");
         }
     }
-    private void anularReserva() {
+    public void anularReserva() {
 
         Huesped huesped=new Huesped(Consola.leerClientePorDni());
 
@@ -329,7 +329,7 @@ public class Vista {
 
     }
 
-    private List<Reserva> getReservasAnulables(List<Reserva>reservasAAnular) {
+    public List<Reserva> getReservasAnulables(List<Reserva>reservasAAnular) {
 
         if (reservasAAnular == null) {
             throw new NullPointerException("ERROR: La lista de reservas no puede ser nula.");
@@ -347,7 +347,7 @@ public class Vista {
     }
 
 
-    private Habitacion consultarDisponibilidad (TipoHabitacion tipoHabitacion,LocalDate fechaInicioReserva,LocalDate fechaFinReserva) {
+    public Habitacion consultarDisponibilidad (TipoHabitacion tipoHabitacion,LocalDate fechaInicioReserva,LocalDate fechaFinReserva) {
         if (tipoHabitacion == null || fechaInicioReserva == null || fechaFinReserva == null) {
             throw new NullPointerException("ERROR: Los parámetros no pueden ser nulos.");
         }
@@ -373,7 +373,7 @@ public class Vista {
 
     }
 
-    private void realizarCheckIn(){
+    public void realizarCheckIn(){
         try {
 
             Huesped huesped=new Huesped(Consola.leerClientePorDni());
@@ -408,7 +408,7 @@ public class Vista {
     }
 
 
-    private void realizarCheckOut(){
+    public void realizarCheckOut(){
 
         try {
         Huesped huesped=new Huesped(Consola.leerClientePorDni());

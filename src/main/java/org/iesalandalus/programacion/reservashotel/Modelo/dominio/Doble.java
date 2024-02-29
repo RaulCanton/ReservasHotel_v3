@@ -12,7 +12,7 @@ public class Doble extends Habitacion{
     private int numCamasIndividuales;
     private int numCamasDobles;
 
-    public Doble(int planta, int puerta, double precio, int numCamasIndividuales,int numCamasDobles) {
+    public Doble(int planta, int puerta, double precio,String identificador, int numCamasIndividuales,int numCamasDobles) {
         super(planta, puerta, precio);
         setNumCamasIndividuales(numCamasIndividuales);
         setNumCamasDobles(numCamasDobles);
