@@ -29,12 +29,13 @@ public class Vista {
         Opcion.setVista(this);
     }
     public void comenzar(){
-
+        Opcion opcion;
         do {
 
             Consola.mostrarMenu();
-            ejecutarOpcion(Consola.elegirOpcion());
-        }while (Consola.elegirOpcion() !=Opcion.SALIR);
+            opcion=Consola.elegirOpcion();
+            ejecutarOpcion(opcion);
+        }while (opcion !=Opcion.SALIR);
 
     }
 
@@ -44,7 +45,7 @@ public class Vista {
 
     private void ejecutarOpcion(Opcion opcion){
 
-        opcion.ejecutar();
+            opcion.ejecutar();
     }
 
     public void insertarHuesped(){

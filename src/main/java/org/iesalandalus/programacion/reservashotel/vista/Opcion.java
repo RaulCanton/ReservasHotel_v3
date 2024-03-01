@@ -105,8 +105,8 @@ public enum Opcion {
             throw new IllegalArgumentException("Ordinal de la opción no válida");
     }
 
-    static void setVista(Vista vista){
-       vista=vista;
+    public static void setVista(Vista vista){
+        vista=vista;
     }
 
     public abstract void ejecutar();

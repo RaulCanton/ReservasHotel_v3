@@ -24,13 +24,13 @@ public class Consola {
     }
 
     public static Opcion elegirOpcion() {
-        int ordinalOpcion;
+        int numOpcion;
         do {
             System.out.println("Elige una opción: ");
-            ordinalOpcion = Entrada.entero();
+            numOpcion = Entrada.entero();
 
-        } while (ordinalOpcion <= 0 && ordinalOpcion >= values().length - 1);
-        return Opcion.values()[ordinalOpcion];
+        } while (numOpcion < 0 && numOpcion >= values().length - 1);
+        return Opcion.values()[numOpcion];
 
     }
 
