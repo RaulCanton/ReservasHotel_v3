@@ -35,7 +35,7 @@ public class Huespedes implements IHuespedes {
         if (indice==-1){
             coleccionHuesped.add(new Huesped(huesped));
         } else {
-            throw new OperationNotSupportedException("ERROR:Y existe un huésped con esos datos.");
+            throw new OperationNotSupportedException("ERROR:Ya existe un huésped con esos datos.");
         }
     }
     @Override

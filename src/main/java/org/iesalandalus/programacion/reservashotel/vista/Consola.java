@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 import static java.time.chrono.JapaneseEra.values;
 
 public class Consola {
+
     private Consola(){
 
     }
@@ -36,22 +37,40 @@ public class Consola {
 
     public static Huesped leerHuesped() {
 
-
         System.out.print("Introduce el nombre del huésped: ");
         String nombre = Entrada.cadena();
         System.out.print("Introduce el dni del cliente: ");
         String dni = Entrada.cadena();
+        if (Huesped.comprobarLetraDni(dni)){
+            dni=dni;
+        }
+
         System.out.print("Introduce el teléfono del huésped: ");
         String telefono = Entrada.cadena();
+        if (telefono.matches(Huesped.ER_TELEFONO)){
+            telefono=telefono;
+        }else {
+            throw new IllegalArgumentException("ERROR: El teléfono del huésped no tiene un formato válido.");
+        }
         System.out.print("Introduce el correo del huésped: ");
         String correo = Entrada.cadena();
-        System.out.print("Introduce la fecha de nacimiento del huésped: ");
+
+        if (correo.matches(Huesped.ER_CORREO)){
+            correo=correo;
+        }
+        else {
+            throw  new IllegalArgumentException("ERROR: El correo del huésped no tiene un formato válido.");
+        }
+        System.out.print("Introduce la fecha de nacimiento del huésped en formato dia/mes/año: ");
         String fechaNacimiento = Entrada.cadena();
 
-        return new Huesped (nombre,dni,telefono,correo,LocalDate.parse(fechaNacimiento));
+        return new Huesped (nombre,dni,telefono,correo,LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern(Huesped.FORMATO_FECHA)));
 
     }
     public static Huesped getHuespedPorDni(){
+
+
+
         String dni;
 
         LocalDate formatoDia = LocalDate.parse("23/07/1980");
@@ -65,22 +84,7 @@ public class Consola {
 
     }
 
-    public static LocalDate leerFecha(String mensaje) {
-        mensaje= "";
-        boolean diaCorrecto = false;
 
-        do {
-            System.out.print("Introduce el día (aaaa/mm/dd): ");
-            mensaje = Entrada.cadena();
-            try {
-                LocalDate.parse(mensaje);
-                diaCorrecto = true;
-            } catch (DateTimeParseException e) {
-                diaCorrecto = false;
-            }
-        } while (!diaCorrecto);
-        return LocalDate.parse(mensaje);
-    }
     public static Habitacion leerHabitacion(){
 
         int opcion;
@@ -130,7 +134,7 @@ public class Consola {
     public static Habitacion leerHabitacionPorIdentificador(){
         int planta;
         int puerta;
-        double precio;
+        //double precio;
         TipoHabitacion tipoHabitacion;
         do {
             System.out.print("Introduce el número de planta. ");
@@ -174,13 +178,9 @@ public class Consola {
         Regimen regimen;
         regimen=Consola.leerRegimen();
 
-        System.out.print("Introduce la fecha de checkIn. ");
-        fechaIn = Entrada.cadena();
-        LocalDate fechaInicioReserva = LocalDate.parse(fechaIn);
+        LocalDate fechaInicioReserva=leerFecha("Introduce la fecha de inicio de la reserva en formato dia/mes/año:");
 
-        System.out.print("Introduce la fecha de checkOut. ");
-        fechaFin = Entrada.cadena();
-        LocalDate fechaFinReserva = LocalDate.parse(fechaFin);
+        LocalDate fechaFinReserva = leerFecha("Introduce la fecha de fin de la reserva en formato dia/mes/año:");
 
         System.out.print("Introduce el número de personas. ");
         numeroPersonas = Entrada.entero();
@@ -188,15 +188,27 @@ public class Consola {
         return new Reserva(huesped,habitacion,regimen,fechaInicioReserva,fechaFinReserva,numeroPersonas);
 
     }
-    public static LocalDateTime leerFechaHora(String mensaje){
+    public static LocalDate leerFecha(String mensaje)throws DateTimeParseException {
+
+        LocalDate fechaTiempo=null;
+
+        do {
+            System.out.print(mensaje);
+            String fecha = Entrada.cadena();
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(Huesped.FORMATO_FECHA);
+            fechaTiempo = LocalDate.parse(fecha, formatoFecha);
+        } while (fechaTiempo==null);
+        return fechaTiempo;
+    }
+    public static LocalDateTime leerFechaHora(String mensaje) throws DateTimeParseException {
         LocalDateTime fechaHora=null;
 
         do {
-            mensaje = "Introduce la fecha y la hora";
+
             System.out.println(mensaje);
             String fechaHoraTiempo = Entrada.cadena();
 
-            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             fechaHora = LocalDateTime.parse(fechaHoraTiempo, formatoFecha);
         }while (fechaHora==null);
 

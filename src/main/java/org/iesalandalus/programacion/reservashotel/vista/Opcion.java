@@ -89,7 +89,7 @@ public enum Opcion {
     };
 
 
-    static Vista vista;
+    private static Vista vista;
     private  String mensajeAMostrar;
     private Opcion(String mensajeAMostrar){
         this.mensajeAMostrar=mensajeAMostrar;
@@ -106,7 +106,10 @@ public enum Opcion {
     }
 
     public static void setVista(Vista vista){
-        vista=vista;
+        if (vista == null) {
+            throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
+        }
+        Opcion.vista=vista;
     }
 
     public abstract void ejecutar();

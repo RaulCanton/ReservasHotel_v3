@@ -8,8 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Huesped {
-    private static final String ER_TELEFONO= "[6,7,8,9][0-9]{8}";
-    private static final String ER_CORREO = "^[_A-Za-z0-9\\+]+(\\.[_A-Za-z0-9\\+]+)*@[A-Za-z0-9-]+(\\.[_A-Za-z0-9+]*(\\.[A-Za-z]{2,})*)$";
+    public static final String ER_TELEFONO= "[6,7,8,9][0-9]{8}";
+    public static final String ER_CORREO = "^[_A-Za-z0-9\\+]+(\\.[_A-Za-z0-9\\+]+)*@[A-Za-z0-9-]+(\\.[_A-Za-z0-9+]*(\\.[A-Za-z]{2,})*)$";
     private static final String ER_DNI="([0-9]{8})([a-zA-Z])";
     public static final String FORMATO_FECHA= ("dd/MM/yyyy");
 
@@ -84,13 +84,7 @@ public class Huesped {
         if (telefono==null){
             throw new NullPointerException("ERROR: El teléfono de un huésped no puede ser nulo.");
         }
-
-        if (telefono.matches(ER_TELEFONO)){
-            this.telefono=telefono;
-        }else {
-            throw new IllegalArgumentException("ERROR: El teléfono del huésped no tiene un formato válido.");
-        }
-
+        this.telefono=telefono;
     }
     public String getCorreo(){
         return correo;
@@ -100,13 +94,7 @@ public class Huesped {
         if (correo==null){
             throw  new NullPointerException("ERROR: El correo de un huésped no puede ser nulo.");
         }
-        if (correo.matches(ER_CORREO)){
-            this.correo=correo;
-        }
-        else {
-            throw  new IllegalArgumentException("ERROR: El correo del huésped no tiene un formato válido.");
-        }
-
+        this.correo=correo;
     }
 
     public String getDni(){
@@ -119,10 +107,11 @@ public class Huesped {
         }
         if (comprobarLetraDni(dni)){
             this.dni=dni;
-        }
+        }else
+            throw new IllegalArgumentException("El formato del dni no es correcto");
     }
 
-    private boolean comprobarLetraDni(String dni) {
+    public static boolean comprobarLetraDni(String dni) {
 
 
         Pattern patron;
@@ -153,8 +142,7 @@ public class Huesped {
         if (fechaNacimiento==null){
             throw  new NullPointerException("ERROR: La fecha de nacimiento de un huésped no puede ser nula.");
         }
-        DateTimeFormatter fechaFormato = DateTimeFormatter.ofPattern(FORMATO_FECHA);
-        this.fechaNacimiento= LocalDate.parse(fechaNacimiento.format(fechaFormato));
+        this.fechaNacimiento= fechaNacimiento;
 
     }
     public LocalDate getFechaNacimiento(){
