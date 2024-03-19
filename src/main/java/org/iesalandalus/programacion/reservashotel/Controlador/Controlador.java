@@ -93,7 +93,7 @@ public class Controlador {
     public List<Reserva> getReservas(){
         return modelo.getReservas();
     }
-    public List<Reserva> getReservas(Huesped huesped){
+    public List<Reserva> getReservas(Huesped huesped)throws NullPointerException{
         return modelo.getReservas();
     }
 

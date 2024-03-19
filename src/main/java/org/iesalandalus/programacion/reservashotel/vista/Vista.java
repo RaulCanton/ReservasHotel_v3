@@ -70,15 +70,18 @@ public class Vista {
 
 
     public void buscarHuesped() {
-
-       controlador.getReservas(Consola.getHuespedPorDni());
+        try {
+            controlador.getReservas(Consola.getHuespedPorDni());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
     public void borrarHuesped(){
 
-        Huesped huesped=new Huesped(Consola.getHuespedPorDni());
     try {
+        Huesped huesped=new Huesped(Consola.getHuespedPorDni());
         controlador.borrar(huesped);
     }catch (OperationNotSupportedException e){
         System.out.println(e.getMessage());
@@ -90,9 +93,9 @@ public class Vista {
 
     }
     public void mostrarHuespedes() {
-            List<Huesped> muestraHuespedes = controlador.getHuespedes();
-            try {
 
+            try {
+                List<Huesped> muestraHuespedes = controlador.getHuespedes();
 
                 if (muestraHuespedes.size() > 0) {
                     Comparator<Huesped> comparadorNombre =
@@ -144,7 +147,6 @@ public class Vista {
 
     public void mostrarHabitaciones() {
         try {
-
 
             List<Habitacion> muestraHabitaciones = controlador.getHabitaciones();
             if (muestraHabitaciones.size() > 0) {

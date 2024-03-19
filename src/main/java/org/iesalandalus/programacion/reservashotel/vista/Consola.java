@@ -67,7 +67,7 @@ public class Consola {
         return new Huesped (nombre,dni,telefono,correo,LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern(Huesped.FORMATO_FECHA)));
 
     }
-    public static Huesped getHuespedPorDni(){
+    public static Huesped getHuespedPorDni()throws NullPointerException{
 
 
 
@@ -134,7 +134,7 @@ public class Consola {
     public static Habitacion leerHabitacionPorIdentificador(){
         int planta;
         int puerta;
-        //double precio;
+
         TipoHabitacion tipoHabitacion;
         do {
             System.out.print("Introduce el número de planta. ");
