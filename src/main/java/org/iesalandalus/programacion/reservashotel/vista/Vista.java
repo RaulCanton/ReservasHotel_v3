@@ -127,7 +127,11 @@ public class Vista {
     }
 
     public void buscarHabitacion() {
-        controlador.buscar(Consola.leerHabitacionPorIdentificador());
+        try {
+            controlador.buscar(Consola.leerHabitacionPorIdentificador());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -183,7 +187,13 @@ public class Vista {
     }
 
     public void mostrarReservaHuesped(){
-        listarReservas(Consola.getHuespedPorDni());
+        try {
+            listarReservas(Consola.getHuespedPorDni());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -212,12 +222,19 @@ public class Vista {
             }
         }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
         }
     }
 
     public void mostrarReservasTipoHabitacion(){
-
-       listarReservas(Consola.leerTipoHabitacion());
+        try {
+            listarReservas(Consola.leerTipoHabitacion());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void comprobarDisponibilidad(){
@@ -262,6 +279,8 @@ public class Vista {
                 System.out.println("Este tipo de habitación no tiene nínguna reserva.");
             }
         }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
     }
@@ -330,6 +349,8 @@ public class Vista {
                 }
             }
         }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
 
@@ -405,11 +426,11 @@ public class Vista {
                     System.out.println("La reserva introducida no es valida..");
                 }
             }
-        } catch (OperationNotSupportedException e) {
-            System.out.println("Error al realizar el checkin: " + e.getMessage());
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e) {
+        }catch (OperationNotSupportedException e){
+            System.out.println("Error al realizar el checkOut: " + e.getMessage());
+        }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }

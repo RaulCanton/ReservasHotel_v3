@@ -62,7 +62,7 @@ public class Controlador {
         modelo.insertar(habitacion);
 
     }
-    public Habitacion buscar(Habitacion habitacion){
+    public Habitacion buscar(Habitacion habitacion)throws NullPointerException{
         return modelo.buscar(habitacion);
     }
 
@@ -97,7 +97,7 @@ public class Controlador {
         return modelo.getReservas();
     }
 
-    public List<Reserva> getResevas(TipoHabitacion tipoHabitacion){
+    public List<Reserva> getResevas(TipoHabitacion tipoHabitacion)throws NullPointerException{
         return modelo.getReservas();
     }
 
@@ -105,10 +105,10 @@ public class Controlador {
         return modelo.getReservasFuturas(habitacion);
     }
 
-    public void realizarCheckIn(Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
+    public void realizarCheckIn(Reserva reserva, LocalDateTime fecha)throws NullPointerException,OperationNotSupportedException,IllegalArgumentException{
         modelo.realizarCheckin(reserva,fecha);
     }
-    public void realizarCheckOut(Reserva reserva,LocalDateTime fecha)throws OperationNotSupportedException{
+    public void realizarCheckOut(Reserva reserva,LocalDateTime fecha)throws OperationNotSupportedException,NullPointerException,IllegalArgumentException{
         modelo.realizarCheckout(reserva,fecha);
     }
 

@@ -9,7 +9,7 @@ public class Simple extends Habitacion{
     }
 
     public Simple(Simple habitacionSimple) {
-        super(habitacionSimple.getPlanta(), habitacionSimple.getPuerta(), habitacionSimple.getPrecio());
+        super(habitacionSimple);
     }
 
     @Override

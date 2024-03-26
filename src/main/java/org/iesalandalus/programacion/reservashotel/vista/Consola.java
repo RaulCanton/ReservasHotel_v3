@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.reservashotel.Modelo.Modelo;
 import org.iesalandalus.programacion.reservashotel.Modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -85,7 +86,7 @@ public class Consola {
     }
 
 
-    public static Habitacion leerHabitacion(){
+    public static Habitacion leerHabitacion()throws IllegalArgumentException{
 
         int opcion;
         int planta;
@@ -135,10 +136,10 @@ public class Consola {
         int planta;
         int puerta;
 
-        TipoHabitacion tipoHabitacion;
         do {
             System.out.print("Introduce el número de planta. ");
             planta = Entrada.entero();
+
         }while (planta <0 || planta>3);
         do {
             System.out.print("Introduce el número de puerta. ");
@@ -169,10 +170,8 @@ public class Consola {
         return Regimen.values()[tipoRegi];
 
     }
-    public static Reserva leerReserva(){
+    public static Reserva leerReserva() {
         int numeroPersonas;
-        String fechaIn;
-        String fechaFin;
         Huesped huesped = new Huesped(Consola.leerHuesped());
         Habitacion habitacion = Consola.leerHabitacion();
         Regimen regimen;

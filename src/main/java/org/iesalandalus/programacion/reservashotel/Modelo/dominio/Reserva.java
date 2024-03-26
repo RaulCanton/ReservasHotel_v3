@@ -81,7 +81,7 @@ public class Reserva {
         return fechaInicioReserva;
     }
 
-    public void setFechaInicioReserva(LocalDate fechaInicioreserva) {
+    public void setFechaInicioReserva(LocalDate fechaInicioreserva)throws NullPointerException,DateTimeException {
         if (fechaInicioreserva==null){
             throw new NullPointerException("ERROR: La fecha de inicio de una reserva no puede ser nula.");
         }
@@ -119,7 +119,7 @@ public class Reserva {
         return checkIn;
     }
 
-    public void setCheckIn(LocalDateTime checkIn) {
+    public void setCheckIn(LocalDateTime checkIn) throws NullPointerException,IllegalArgumentException {
         if (checkIn==null){
             throw new NullPointerException("ERROR: El checkin de una reserva no puede ser nulo.");
         }
@@ -133,12 +133,12 @@ public class Reserva {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDateTime checkOut) {
+    public void setCheckOut(LocalDateTime checkOut)throws NullPointerException,IllegalArgumentException {
         if (checkOut==null){
             throw new NullPointerException("ERROR: El checkOut de una reserva no puede ser nulo.");
         }
         if(checkOut.isBefore(checkIn)){
-            throw new IllegalArgumentException("ERROR: El checkOut de una reserva no puede ser anterior al checkin. ");
+            throw new IllegalArgumentException("ERROR: El checkOut de una reserva no puede ser anterior al checkIn. ");
         }
         LocalDateTime diaHoraOut =LocalDateTime.now().plusHours(MAX_HORAS_POSTERIOR_CHECKOUT);
         if (checkOut.isAfter(ChronoLocalDateTime.from(diaHoraOut))){

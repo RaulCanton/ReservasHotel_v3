@@ -17,7 +17,7 @@ public class Suite extends Habitacion{
     }
 
     public Suite(Suite habitacionSuite){
-        super(habitacionSuite.getPlanta(), habitacionSuite.getPuerta(), habitacionSuite.getPrecio());
+        super(habitacionSuite);
         setNumBanos(habitacionSuite.getNumBanos());
         setTieneJacuzzi(habitacionSuite.isTieneJacuzzi());
     }
@@ -29,7 +29,7 @@ public class Suite extends Habitacion{
         return numBanos;
     }
 
-    public void setNumBanos(int numBanos) {
+    public void setNumBanos(int numBanos)throws IllegalArgumentException {
         if (numBanos < MIN_NUM_BANOS || numBanos > MAX_NUM_BANOS) {
             throw new IllegalArgumentException("ERROR: Baños introducidos erróneo..");
         }
@@ -42,6 +42,7 @@ public class Suite extends Habitacion{
     }
 
     public void setTieneJacuzzi(boolean tieneJacuzzi) {
+
         this.tieneJacuzzi = tieneJacuzzi;
     }
 

@@ -16,12 +16,14 @@ public class Doble extends Habitacion{
         super(planta, puerta, precio);
         setNumCamasIndividuales(numCamasIndividuales);
         setNumCamasDobles(numCamasDobles);
+        validaNumCamas();
     }
 
     public Doble(Doble habitacionDoble) {
-        super(habitacionDoble.getPlanta(), habitacionDoble.getPuerta(), habitacionDoble.getPrecio());
+        super(habitacionDoble);
         setNumCamasIndividuales(habitacionDoble.getNumCamasIndividuales());
         setNumCamasDobles(habitacionDoble.getNumCamasDobles());
+        validaNumCamas();
 
     }
 
@@ -30,7 +32,9 @@ public class Doble extends Habitacion{
     }
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
+
         this.numCamasIndividuales = numCamasIndividuales;
+        validaNumCamas();
     }
 
     public int getNumCamasDobles() {
@@ -39,10 +43,11 @@ public class Doble extends Habitacion{
 
     public void setNumCamasDobles(int numCamasDobles) {
         this.numCamasDobles = numCamasDobles;
+        validaNumCamas();
     }
 
     private void validaNumCamas(){
-        if(numCamasIndividuales !=2 && (numCamasDobles<1 || numCamasDobles>2)){
+        if(numCamasIndividuales !=MAX_NUM_CAMAS_INDIVIDUALES && (numCamasDobles<MIN_NUM_CAMAS_DOBLES || numCamasDobles>MAX_NUM_CAMAS_DOBLES)){
             throw new IllegalArgumentException("El número de camas elegido no es correcto.");
         }
     }

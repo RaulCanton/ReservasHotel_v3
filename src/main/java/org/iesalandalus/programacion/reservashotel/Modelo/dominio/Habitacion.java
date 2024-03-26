@@ -44,11 +44,14 @@ public abstract class Habitacion {
     }
 
     protected void setIdentificador(){
-        this.identificador=identificador;
+        if (identificador==null){
+            throw new NullPointerException("El identificador no puede ser nulo.");
+        }
+        this.identificador= getPlanta() +String.valueOf(getPuerta());
     }
     protected void setIdentificador(String identificador){
         if (identificador==null){
-            throw new IllegalArgumentException("El identificador no es correcto.");
+            throw new NullPointerException("El identificador no puede ser nulo.");
         }
       this.identificador=identificador;
     }

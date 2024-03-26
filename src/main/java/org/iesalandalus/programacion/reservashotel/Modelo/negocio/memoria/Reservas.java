@@ -84,7 +84,7 @@ public class Reservas implements IReservas {
         return reservasHuesped;
 
     }
-    public List<Reserva> getReservas(TipoHabitacion tipoHabitacion){
+    public List<Reserva> getReservas(TipoHabitacion tipoHabitacion)throws NullPointerException{
         if (tipoHabitacion == null) {
             throw new NullPointerException("ERROR: No se pueden buscar reservas de un aula nula.");
         }
@@ -112,7 +112,7 @@ public class Reservas implements IReservas {
         return reservasHabitacion;
     }
 
-    public void realizarCheckin (Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
+    public void realizarCheckin (Reserva reserva, LocalDateTime fecha)throws NullPointerException,IllegalArgumentException{
         if (reserva == null) {
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
@@ -122,7 +122,7 @@ public class Reservas implements IReservas {
         fecha= LocalDate.from(LocalDateTime.parse(fechaCheckIn)).atStartOfDay();
         reserva.setCheckIn(fecha);
     }
-    public void realizarCheckout (Reserva reserva, LocalDateTime fecha)throws OperationNotSupportedException{
+    public void realizarCheckout (Reserva reserva, LocalDateTime fecha)throws NullPointerException,IllegalArgumentException{
         if (reserva == null) {
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
